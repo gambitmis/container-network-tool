@@ -7,3 +7,4 @@ psutil
 speedtest-cli
 flask[async]
 python3-nmap
+icmplib

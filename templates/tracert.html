@@ -1,0 +1,5 @@
+{% set last_distance = 0 %}
+<p>Distance/TTL    Address     Average round-trip time</p>
+{% for hop in trace %}
+    <p>{{ hop['distance'] }}  {{ hop['address'] }}  {{ hop['avg_rtt'] }}</p>
+{% endfor %}    

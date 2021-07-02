@@ -3,6 +3,8 @@ import socket,platform,os,psutil,multiprocessing
 import datetime,pytz
 import speedtest
 import inspect
+import ipaddress
+from icmplib import ping, multiping, traceroute, resolve 
 
 ver = os.environ['version']
 release = os.environ['releases']
@@ -45,3 +47,20 @@ def hello_world():
     flask_env = getFlaskEnv(request.environ)
     return "<p>Time:\"{}\"**** Hostname:\"{}\"**** CONTAINER_IP:\"{}\"**** REQUEST_IP:\"{}\"**** version:\"{}-{}\" </p>".format(now_th,hostname,ipaddr,flask_env['remoteAddr'],ver,release)
   
+@app.route("/ping/ipv4/<ipaddr>")
+def pingIpv4(ipaddr):
+    try:
+        ipaddress.ip_address(ipaddr)
+        pingDest = ping(ipaddr, count=3, interval=0.2)
+    except:
+        pingDest = "IP Address in not valid"
+    return "ping {}".format(pingDest)
+
+@app.route("/tracert/ipv4/<ipaddr>")
+def tracert(ipaddr):
+    try:
+        ipaddress.ip_address(ipaddr)
+        trace = traceroute(ipaddr)
+    except:
+        trace = "IP Address in not valid"
+    return render_template('tracert.html',trace=trace)
