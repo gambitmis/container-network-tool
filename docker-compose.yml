@@ -7,3 +7,7 @@ services:
             - .:/app
         ports:
             - "5000:5000"
+        environment:
+            version: 1
+            releases: 1a
+            
