@@ -40,12 +40,12 @@ def getFlaskEnv(req):
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/short")
 def hello_world():
     hostname,ipaddr = getHostnameAndIpAddr()
     now_th,now_utc = getNow()
     flask_env = getFlaskEnv(request.environ)
-    return "<p>Time:\"{}\"**** Hostname:\"{}\"**** CONTAINER_IP:\"{}\"**** REQUEST_IP:\"{}\"**** version:\"{}-{}\" </p>".format(now_th,hostname,ipaddr,flask_env['remoteAddr'],ver,release)
+    return "Time:\"{}\"___Hostname:\"{}\"___CONTAINER_IP:\"{}\"___REQUEST-IP:\"{}\"___version:\"{}-{}\" ".format(now_th,hostname,ipaddr,flask_env['remoteAddr'],ver,release)
   
 @app.route("/ping/ipv4/<ipaddr>")
 def pingIpv4(ipaddr):
